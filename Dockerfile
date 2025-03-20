@@ -22,5 +22,3 @@ RUN pip install -r /tmp/requirements.txt
 COPY . /WebSitem/app
 WORKDIR /WebSitem/app
 
-
-
