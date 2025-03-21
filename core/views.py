@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'index.html')  # Eğer index.html farklı bir klasördeyse, yolu düzenleyin
+
+def contact(request):
+    return render(request, 'contact.html')  # Eğer contact.html farklı bir klasördeyse, yolu düzenleyin
