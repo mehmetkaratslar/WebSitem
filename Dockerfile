@@ -1,24 +1,25 @@
-# Pull the official base image
+# Resmi Python 3.10 Slim imajını çekiyoruz
 FROM python:3.10-slim
 
-RUN apt-get update
+# Gerekli paketleri yükleyelim
+RUN apt-get update && apt-get install -y \
+    python3-dev build-essential \
+    && rm -rf /var/lib/apt/lists/*  # Gereksiz dosyaları temizleyerek imajı küçültelim
 
-RUN apt-get install python3-dev build-essential -y
+# Ortam değişkenlerini ayarlıyoruz
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV VİRTUAL_ENV=/opt/venv
+# Pip'i ve virtualenv'i güncelleyelim ve sanal ortam oluşturalım
+RUN pip install --upgrade pip && \
+    pip install virtualenv && \
+    python -m virtualenv $VIRTUAL_ENV
 
+# Gereksinimleri yükleyelim
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Upgrade pip and install virtualenv
-RUN pip install --upgrade pip
-RUN pip install virtualenv && python -m virtualenv $VİRTUAL_ENV
-
-ENV PATH="$VİRTUAL_ENV/bin:$PATH"
-
-ADD ./requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
-
+# Proje dosyalarını kopyalayalım
 COPY . /WebSitem/app
 WORKDIR /WebSitem/app
-
