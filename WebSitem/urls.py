@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+=======
+from core.views import index
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index, name='index'),
+>>>>>>> b6b2a97 (gücellem)
 ]

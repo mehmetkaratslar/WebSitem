@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+<<<<<<< HEAD
 
+=======
+>>>>>>> b6b2a97 (gücellem)
 from pathlib import Path
 import environ
 env = environ.Env(DEBUG=(bool, False))
